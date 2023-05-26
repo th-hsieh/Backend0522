@@ -16,9 +16,7 @@ public class CollaboratorsController {
 
     @Autowired
     private CollaboratorsService collaboratorsService;
-
     //這是對到await axios.post("http://localhost:8080/collaborator/save"嗎？
-
     @PostMapping(path="/save")
     public String saveCollaborator(@RequestBody CollaboratorsDTO collaboratorsDTO){
         String id = collaboratorsService.addOneCollaborator(collaboratorsDTO);
@@ -27,7 +25,6 @@ public class CollaboratorsController {
 
     @PostMapping(path="/login")
     public ResponseEntity<?> loginCollaborator(@RequestBody LoginDTO loginDTO){
-
         LoginResponse loginResponse = collaboratorsService.loginCollaborator(loginDTO);
         return ResponseEntity.ok(loginResponse);
     }

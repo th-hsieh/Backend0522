@@ -40,6 +40,7 @@ public class CollaboratorsIMPL implements CollaboratorsService {
     @Override
     public LoginResponse loginCollaborator(LoginDTO loginDTO){
         String msg = "";
+        
         Collaborator collaborator1 = collaboratorsRepository.findByEmail(loginDTO.getEmail());
         if(collaborator1 != null){
             String password = loginDTO.getPassword();

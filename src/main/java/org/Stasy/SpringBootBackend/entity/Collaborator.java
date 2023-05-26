@@ -2,8 +2,9 @@ package org.Stasy.SpringBootBackend.entity;
 
 import jakarta.persistence.*;
 
-@Table(name="collaborator")
 @Entity
+@Table(name="collaborator")
+
 public class Collaborator {
 
     //attributes
@@ -12,15 +13,14 @@ public class Collaborator {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int collaborator_id;
 
-    @Column(name="collaborator_name")
+    @Column(name="collaborator_name",nullable=false)
     private String collaborator_name;
 
-    @Column(name="collaborator_email")
+    @Column(name="collaborator_email", nullable=false)
     private String email;
 
-    @Column(name="collaborator_password")
+    @Column(name="collaborator_password", nullable=false)
     private String password;
-
 
     //Constructor1
     public Collaborator(int collaborator_id, String collaborator_name, String email, String password){
@@ -32,7 +32,6 @@ public class Collaborator {
 
     //Constructor2
     public Collaborator(){}
-
 
     //getters and setters
     public int getCollaborator_id() {
@@ -55,7 +54,7 @@ public class Collaborator {
         return email;
     }
 
-    public void setCEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
