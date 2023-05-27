@@ -17,35 +17,35 @@ public class CollaboratorsIMPL implements CollaboratorsService {
     @Autowired
     private CollaboratorsRepository collaboratorsRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-
     @Override
-    public String addOneCollaborator(CollaboratorsDTO collaboratorsDTO){
+    public String addOneCollaborator(CollaboratorsDTO collaboratorsDTO) {
+        String email = collaboratorsDTO.getEmail();
+
+        // Check if email already exists in the database
+        if (collaboratorsRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("An email address can only be registered for an account.") ;
+        }
 
         Collaborator collaborator = new Collaborator(
-
-            collaboratorsDTO.getCollaborator_id(),
-            collaboratorsDTO.getCollaborator_name(),
-            collaboratorsDTO.getEmail(),
-            collaboratorsDTO.getPassword()
-            //this.passwordEncoder.encode(collaboratorsDTO.getPassword())
+                collaboratorsDTO.getCollaborator_id(),
+                collaboratorsDTO.getCollaborator_name(),
+                email,
+                collaboratorsDTO.getPassword()
         );
 
         collaboratorsRepository.save(collaborator);
         return collaborator.getCollaborator_name();
-
     }
+
 
     @Override
     public LoginResponse loginCollaborator(LoginDTO loginDTO){
-        String msg = "";
-        
+
         Collaborator collaborator1 = collaboratorsRepository.findByEmail(loginDTO.getEmail());
         if(collaborator1 != null){
             String password = loginDTO.getPassword();
             String encodedPassword = collaborator1.getPassword();
-            Boolean isPwdRight;// = passwordEncoder.matches(password, encodedPassword);
+            Boolean isPwdRight;
 
             if(password.equals(encodedPassword)){
                 isPwdRight=true;

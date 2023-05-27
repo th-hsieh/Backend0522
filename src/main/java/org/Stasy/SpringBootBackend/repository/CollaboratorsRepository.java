@@ -10,7 +10,9 @@ import java.util.Optional;
 @EnableJpaRepositories
 @Repository
 public interface CollaboratorsRepository extends JpaRepository<Collaborator, Long>  {
-    //Optional<Collaborator> findOneByEmailAndPassword();
+
+    boolean existsByEmail(String email);
+
     Optional<Collaborator> findOneByEmailAndPassword(String email, String password);
     Collaborator findByEmail(String email);
 }
